@@ -4,11 +4,14 @@ import { motion } from "framer-motion";
 import "../../styles/product-card.css";
 import { Col } from "reactstrap";
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../redux/slices/cartSlice";
 
 const ProductCard = ({ item }) => {
   const dispatch = useDispatch();
+
   const addToCart = () => {
     dispatch(
       cartActions.addItem({
@@ -18,13 +21,13 @@ const ProductCard = ({ item }) => {
         image: item.imgUrl,
       })
     );
-    alert("Product added to the cart");
+   toast.success("Product added succesfully")
   };
   return (
     <Col lg="3" md="4" className="mb-2">
       <div className="product__item">
         <div className="product__image">
-          <motion.img whileHover={{ scale: 0.9 }} src={item.imgUrl} alt="" />
+         <Link to={`/shop/${item.id}`}><motion.img whileHover={{ scale: 0.9 }} src={item.imgUrl} alt="" /></Link> 
         </div>
         <div className="p-2 product__info">
           <h3 className="product__name">
@@ -32,12 +35,15 @@ const ProductCard = ({ item }) => {
           </h3>
           <span>{item.category}</span>
         </div>
+        
         <div className="product__card-bottom d-flex align-items-center justify-content-between p-2">
-          <span className="price">{item.price} ETB</span>
+          <span className="price">{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ETB </span>
           <motion.span whileTap={{ scale: 1.2 }} onClick={addToCart}>
             <i className="ri-add-line"></i>
           </motion.span>
+          
         </div>
+        
       </div>
     </Col>
   );

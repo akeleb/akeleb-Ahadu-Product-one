@@ -37,7 +37,7 @@ const Home = () => {
       (item) => item.category === "wardrobe"
     );
     const filteredPopularProducts = products.filter(
-      (item) => item.category === "modern-sofa"||item.category==="table"||item.category==="dining-table"
+      (item) => item.shortDesc === "popular"
     );
 
     setTredingProducts(filteredTrendingProducts);

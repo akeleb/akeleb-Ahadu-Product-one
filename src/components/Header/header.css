@@ -87,7 +87,7 @@
   left: 0;
   z-index: 999;
   box-shadow: 3px 8px -3px #ddd;
-  background: rgb(241, 217, 217);
+  background: 	#f1d6d6
 }
 
 @media only screen and (max-width: 768px) {

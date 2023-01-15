@@ -1,12 +1,13 @@
 import React, { useRef, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import logo from "../../assets/images/custom-logo.jpg";
+import logo from "../../assets/images/logo-transparent.png";
 import userIcon from "../../assets/images/user-icon.png";
 
 import "./header.css";
 import { motion } from "framer-motion";
 import { Container, Row } from "reactstrap";
+import { useSelector } from "react-redux";
 
 const nav__links = [
   {
@@ -25,6 +26,7 @@ const nav__links = [
 const Header = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   const stickyHeaderFunc = () => {
     window.addEventListener("scroll", () => {
@@ -77,11 +79,11 @@ const Header = () => {
               <span className="fav__icons">
                 {" "}
                 <i className="ri-heart-fill"></i>
-                <span className="badge">1</span>
+                <span className="badge">5</span>
               </span>
               <span className="cart__icons">
                 <i className="ri-shopping-bag-fill"></i>
-                <span className="badge">1</span>
+                <span className="badge">{totalQuantity}</span>
               </span>
               <span>
                 <motion.img whileTap={{ scale: 1.2 }} src={userIcon} alt="" />
