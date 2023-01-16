@@ -35,15 +35,15 @@ const ProductDetail = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     e.target.reset();
-    // const reviewUserName = reviewUser.current.value;
-    // const reviewUserMsg = reviewMsg.current.value;
-    // // console.log(reviewUserName, reviewUserMsg,rating);
-    // const reviewObj = {
-    //   userName: reviewUserName,
-    //   text: reviewUserMsg,
-    //   rating,
-    // };
-    // console.log(reviewObj);
+    const reviewUserName = reviewUser.current.value;
+    const reviewUserMsg = reviewMsg.current.value;
+    // console.log(reviewUserName, reviewUserMsg,rating);
+    const reviewObj = {
+      userName: reviewUserName,
+      text: reviewUserMsg,
+      rating,
+    };
+    console.log(reviewObj);
     toast.success("Review submited succesfully.")
   };
 
