@@ -76,7 +76,7 @@ const products = [
         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
       },
     ],
-    avgRating: 4.7,
+    avgRating: 4.3,
     numReviews: 33,
   },
 

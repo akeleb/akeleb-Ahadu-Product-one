@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import "../../styles/product-card.css";
 import { Col } from "reactstrap";
 import { Link } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../redux/slices/cartSlice";
@@ -21,13 +21,15 @@ const ProductCard = ({ item }) => {
         image: item.imgUrl,
       })
     );
-   toast.success("Product added succesfully")
+    toast.success("Product added succesfully");
   };
   return (
     <Col lg="3" md="4" className="mb-2">
       <div className="product__item">
         <div className="product__image">
-         <Link to={`/shop/${item.id}`}><motion.img whileHover={{ scale: 0.9 }} src={item.imgUrl} alt="" /></Link> 
+          <Link to={`/shop/${item.id}`}>
+            <motion.img whileHover={{ scale: 0.9 }} src={item.imgUrl} alt="" />
+          </Link>
         </div>
         <div className="p-2 product__info">
           <h3 className="product__name">
@@ -35,15 +37,70 @@ const ProductCard = ({ item }) => {
           </h3>
           <span>{item.category}</span>
         </div>
-        
+
+        <div className="product__rating d-flex align-items-center gap-3">
+          <div>
+            <span>
+              <i
+                className={
+                  item.avgRating >= 1
+                    ? "ri-star-s-fill"
+                    : item.avgRating >= 0.5
+                    ? "ri-star-half-s-line"
+                    : "ri-star-line"
+                }
+              ></i>
+            </span>
+            <span>
+              <i className={
+                  item.avgRating >= 2
+                    ? "ri-star-s-fill"
+                    : item.avgRating >= 1.5
+                    ? "ri-star-half-s-line"
+                    : "ri-star-line"
+                }></i>
+            </span>
+            <span>
+              <i className={
+                  item.avgRating >= 3
+                    ? "ri-star-s-fill"
+                    : item.avgRating >= 2.5
+                    ? "ri-star-half-s-line"
+                    : "ri-star-line"
+                }></i>
+            </span>
+            <span>
+              <i className={
+                  item.avgRating >= 4
+                    ? "ri-star-s-fill"
+                    : item.avgRating >= 3.5
+                    ? "ri-star-half-s-line"
+                    : "ri-star-line"
+                }></i>
+            </span>
+            <span>
+              <i className={
+                  item.avgRating >= 5
+                    ? "ri-star-s-fill"
+                    : item.avgRating >= 4.5
+                    ? "ri-star-half-s-line"
+                    : "ri-star-line"
+                }></i>
+            </span>
+          </div>
+          <p>
+            (<span>{item.avgRating}</span> Ratings)
+          </p>
+        </div>
+
         <div className="product__card-bottom d-flex align-items-center justify-content-between p-2">
-          <span className="price">{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ETB </span>
+          <span className="price">
+            {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ETB{" "}
+          </span>
           <motion.span whileTap={{ scale: 1.2 }} onClick={addToCart}>
             <i className="ri-add-line"></i>
           </motion.span>
-          
         </div>
-        
       </div>
     </Col>
   );
