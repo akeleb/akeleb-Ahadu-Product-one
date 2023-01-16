@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import logo from "../../assets/images/logo-transparent.png";
 import userIcon from "../../assets/images/user-icon.png";
@@ -26,6 +26,7 @@ const nav__links = [
 const Header = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   const stickyHeaderFunc = () => {
@@ -47,6 +48,10 @@ const Header = () => {
   });
 
   const menuToggle = () => menuRef.current.classList.toggle("active__menu");
+
+  const navigateToCart = () => {
+    navigate("/cart");
+  };
   return (
     <header className="header" ref={headerRef}>
       <Container>
@@ -81,7 +86,7 @@ const Header = () => {
                 <i className="ri-heart-fill"></i>
                 <span className="badge">5</span>
               </span>
-              <span className="cart__icons">
+              <span className="cart__icons" onClick={navigateToCart}>
                 <i className="ri-shopping-bag-fill"></i>
                 <span className="badge">{totalQuantity}</span>
               </span>

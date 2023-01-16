@@ -206,7 +206,7 @@ const products = [
     shortDesc:
     "popular",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    "This modern chair is the perfect addition to any home or office. Its sleek and modern design adds a touch of style to any room or environment. Its ergonomic design provides comfort and support, while its armrests and back offer maximum support. The comfortable fabric upholstery provides a luxurious feel and is easy to clean and maintain. The sturdy steel frame ensures lasting durability, making this chair an excellent choice for modern seating.",
     reviews: [
       {
         rating: 4.6,
