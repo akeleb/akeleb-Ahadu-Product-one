@@ -44,7 +44,7 @@ const ProductDetail = () => {
       rating,
     };
     console.log(reviewObj);
-    toast.success("Review submited succesfully.")
+    toast.success("Review submited successfully.")
   };
 
   const addToCart = () => {
@@ -56,7 +56,7 @@ const ProductDetail = () => {
         price,
       })
     );
-    toast.success("Product added succesfully.");
+    toast.success("Product added successfully.");
   };
   useEffect(() => {
     window.scrollTo(0, 0);

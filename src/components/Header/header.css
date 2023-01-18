@@ -63,10 +63,39 @@
   color: var(--primary-color);
   cursor: pointer;
 }
-.nav__icons span img {
+.nav__icons .profile {
+  position: relative;
+  z-index: 9;
+}
+
+.nav__icons.profile,.profile__action {
+  position: absolute;
+  top: 89%;
+  left: 0;
+  width: 140px;
+  z-index: 10;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: var(--card-bg-01);
+  line-height: 30px;
+  display: none;
+  cursor: pointer;
+}
+.show__Profileactions {
+  display: block;
+}
+.profile__action{
+  text-align: center;
+  border-radius: 10px;
+}
+
+.nav__icons .profile img {
   width: 30px;
   height: 30px;
   cursor: pointer;
+  border-radius: 50px;
 }
 .mobile__menu {
   font-size: 1.3rem;
@@ -87,7 +116,7 @@
   left: 0;
   z-index: 999;
   box-shadow: 3px 8px -3px #ddd;
-  background: 	#f1d6d6
+  background: #f1d6d6;
 }
 
 @media only screen and (max-width: 768px) {
