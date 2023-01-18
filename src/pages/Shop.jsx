@@ -8,10 +8,10 @@ import products from "../assets/data/products";
 import ProductsList from "../components/UI/ProductsList";
 
 const Shop = () => {
-  const [productsData, setProductsData] = useState(products);
-
+  const [ productsData, setProductsData ] = useState(products);
   const handleFilter = (e) => {
     const filterValue = e.target.value;
+
     if (filterValue === "sofa") {
       const filteredProducts = products.filter(
         (item) => item.category === "sofa"
@@ -44,15 +44,25 @@ const Shop = () => {
     }
   };
 
-
-
-  const handlSearch = (e) =>
-  {
+  const handlSearch = (e) => {
     const searchTerm = e.target.value;
     const searchedProducts = products.filter((item) =>
       item.productName.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setProductsData(searchedProducts);
+  };
+
+  const handlSort = (e) => {
+    const sortValue = e.target.value;
+    if (sortValue === "ascending")
+    {
+      const sortedProducts= products.sort((a, b) => a.productName.localeCompare(b.productName))
+      setProductsData(sortedProducts);
+    }
+    if (sortValue === "descending") {
+      const sortedProducts= products.sort().reverse((a, b) => b.productName.localeCompare(a.productName))
+      setProductsData(sortedProducts);
+    }
   };
 
   return (
@@ -75,7 +85,7 @@ const Shop = () => {
             </Col>
             <Col lg="3" md="6" className="text-end">
               <div className="filter__widget">
-                <select>
+                <select onChange={handlSort}>
                   <option>Sort By</option>
                   <option value="ascending">Ascending</option>
                   <option value="descending">Descending</option>

@@ -27,10 +27,10 @@ const Cart = () => {
                 <table className="table bordered">
                   <thead>
                     <tr>
-                      <th>Image</th>
-                      <th>Title</th>
+                      <th>Picture</th>
+                      <th>Name</th>
                       <th>price</th>
-                      <th>Qty</th>
+                      <th>Quantity</th>
                       <th>Delete</th>
                     </tr>
                   </thead>

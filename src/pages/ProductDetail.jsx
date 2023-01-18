@@ -51,7 +51,7 @@ const ProductDetail = () => {
     dispatch(
       cartActions.addItem({
         id,
-        image: imgUrl,
+        imgUrl: imgUrl,
         productName,
         price,
       })
@@ -99,9 +99,9 @@ const ProductDetail = () => {
                   <span className="product__price">
                     {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ETB
                   </span>
-                  <span>Category: {category.toUpperCase()}</span>
+                  <span>Category: {category.charAt(0).toUpperCase()+category.slice(1)}</span>
                 </div>
-                <p className="mt-3">{description}</p>
+                <p className="mt-3 descp">{description}</p>
                 <motion.button
                   whileTap={{ scale: 1.2 }}
                   className="buy__btn"
@@ -134,7 +134,7 @@ const ProductDetail = () => {
               </div>
               {tab === "desc" ? (
                 <div className="tab__content mt-5">
-                  <p>{description}</p>
+                  <p className="descp">{description}</p>
                 </div>
               ) : (
                 <div className="product__review">
@@ -144,7 +144,7 @@ const ProductDetail = () => {
                         <li key={index} className="mb-4">
                           <h6>anonymous</h6>
                           <span>{item.rating} (rating)</span>
-                          <p>{item.text}</p>
+                          <p className="descp">{item.text}</p>
                         </li>
                       ))}
                     </ul>
