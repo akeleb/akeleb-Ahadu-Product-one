@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import { motion } from "framer-motion";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import "../styles/checkout.css";
 import { useSelector } from "react-redux";
+import countryList from "react-select-country-list";
+import Select from "react-select";
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 const CheckOut = () => {
   const totalQty = useSelector((state) => state.cart.totalQuantity);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
+
+  const [value, setValue] = useState("");
+  const [phone, setPhone] = useState("");
+  const options = useMemo(() => countryList().getData(), []);
+
+  const countryListHandler = (value) => {
+    setValue(value);
+  };
+
   return (
     <Helmet title="CheckOut">
       <CommonSection title="CheckOut" />
@@ -27,7 +40,12 @@ const CheckOut = () => {
                 </FormGroup>
 
                 <FormGroup className="form__group">
-                  <input type="phone" placeholder="Phone Number" />
+                  <PhoneInput className ="phn__select"
+                    defaultCountry="ET"
+                   placeholder="Eneter your phone number"
+                    value={phone}
+                    onChange={setPhone}                   
+                  />
                 </FormGroup>
 
                 <FormGroup className="form__group">
@@ -42,7 +60,13 @@ const CheckOut = () => {
                 </FormGroup>
 
                 <FormGroup className="form__group">
-                  <input type="text" placeholder="Country" />
+                  <Select
+                    className="country__list"
+                    options={options}
+                    value={value}
+                    onChange={countryListHandler}
+                    placeholder="Select your country... "
+                  />
                 </FormGroup>
               </Form>
             </Col>
@@ -65,7 +89,10 @@ const CheckOut = () => {
                 <h4>
                   Total cost: <span>{totalAmount} Birr</span>
                 </h4>
-                <motion.button whileTap={{ scale: 1.2 }} className="buy__btn auth__btn checkout__btn w-100">
+                <motion.button
+                  whileTap={{ scale: 1.2 }}
+                  className="buy__btn auth__btn checkout__btn w-100"
+                >
                   place your order
                 </motion.button>
               </div>

@@ -112,6 +112,7 @@ const Header = () => {
                 <i className="ri-shopping-bag-fill"></i>
                 <span className="badge">{totalQuantity}</span>
               </span>
+             
               <div className="profile">
                 <motion.img
                   whileTap={{ scale: 1.2 }}
@@ -119,6 +120,7 @@ const Header = () => {
                   alt=""
                   onClick={toggleProfileActions}
                 />
+      
                 <div
                   className="profile__action"
                   ref={profileActionRef}
@@ -134,6 +136,7 @@ const Header = () => {
                   )}
                 </div>
               </div>
+              <span>{currentUser ? currentUser.displayName : "" }</span>
               <div className="mobile__menu">
                 <span onClick={menuToggle}>
                   <i className="ri-menu-line"></i>
