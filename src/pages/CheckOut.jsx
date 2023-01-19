@@ -7,8 +7,8 @@ import "../styles/checkout.css";
 import { useSelector } from "react-redux";
 import countryList from "react-select-country-list";
 import Select from "react-select";
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/bootstrap.css";
 
 const CheckOut = () => {
   const totalQty = useSelector((state) => state.cart.totalQuantity);
@@ -32,31 +32,49 @@ const CheckOut = () => {
               <h6 className="mb-4 fw-bold">Billing Information</h6>
               <Form className="billing__form">
                 <FormGroup className="form__group">
-                  <input type="text" placeholder="Eneter Your Name" />
-                </FormGroup>
-
-                <FormGroup className="form__group">
-                  <input type="email" placeholder="Eneter Your Email" />
-                </FormGroup>
-
-                <FormGroup className="form__group">
-                  <PhoneInput className ="phn__select"
-                    defaultCountry="ET"
-                   placeholder="Eneter your phone number"
-                    value={phone}
-                    onChange={setPhone}                   
+                  <input
+                    type="text"
+                    placeholder="Eneter Your Name"
+                    className="inputf"
                   />
                 </FormGroup>
 
                 <FormGroup className="form__group">
-                  <input type="text" placeholder="Streeet Address" />
+                  <input
+                    type="email"
+                    placeholder="Eneter Your Email"
+                    className="inputf"
+                  />
                 </FormGroup>
 
                 <FormGroup className="form__group">
-                  <input type="text" placeholder="City" />
+                  <PhoneInput
+                    className="phn__select"
+                    country="et"
+                    placeholder="Eneter your phone number"
+                    enableSearch={true}
+                    value={phone}
+                    onChange={(phone) => setPhone(phone)}
+                  />
+                </FormGroup>
+
+                <FormGroup className="form__group">
+                  <input
+                    type="text"
+                    placeholder="Streeet Address"
+                    className="inputf"
+                  />
+                </FormGroup>
+
+                <FormGroup className="form__group">
+                  <input type="text" placeholder="City" className="inputf" />
                 </FormGroup>
                 <FormGroup className="form__group">
-                  <input type="text" placeholder="Postal Code" />
+                  <input
+                    type="text"
+                    placeholder="Postal Code"
+                    className="inputf"
+                  />
                 </FormGroup>
 
                 <FormGroup className="form__group">
@@ -90,6 +108,7 @@ const CheckOut = () => {
                   Total cost: <span>{totalAmount} Birr</span>
                 </h4>
                 <motion.button
+                  type="submit"
                   whileTap={{ scale: 1.2 }}
                   className="buy__btn auth__btn checkout__btn w-100"
                 >
