@@ -11,7 +11,7 @@ const Clock = () => {
   let interval=React.useRef();
 
   const countDown = () => {
-    const destination = new Date("Feb 1, 2023");
+    const destination = new Date("March 28, 2023");
     interval.current = setInterval(() =>
     {
       const now = new Date().getTime();
