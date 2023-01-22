@@ -10,7 +10,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <footer className="footer">
-      <Container>
+      <Container fluid>
         <Row>
           <Col lg="4" md="6" className="mb-4">
             <div className="logo">

@@ -1,0 +1,7 @@
+.loader-spiner{
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    display: flex;
+    color: rgb(14, 180, 28);
+}

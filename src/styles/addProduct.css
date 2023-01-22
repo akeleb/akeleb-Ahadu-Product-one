@@ -1,0 +1,12 @@
+.form__group{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px 10px;
+}
+
+.category_div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

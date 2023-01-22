@@ -18,7 +18,8 @@ const CheckOut = () => {
   const [phone, setPhone] = useState("");
   const options = useMemo(() => countryList().getData(), []);
 
-  const countryListHandler = (value) => {
+  const countryListHandler = (value) =>
+  {
     setValue(value);
   };
 
@@ -82,6 +83,7 @@ const CheckOut = () => {
                     className="country__list"
                     options={options}
                     value={value}
+                    defaultInputValue="Ethiopia"
                     onChange={countryListHandler}
                     placeholder="Select your country... "
                   />
