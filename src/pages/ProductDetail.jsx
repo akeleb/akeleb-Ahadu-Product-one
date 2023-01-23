@@ -43,7 +43,7 @@ const ProductDetail = () =>
       }
     }
     getProduct();
-  },[])
+  })
   const {
     imgUrl,
     productName,
