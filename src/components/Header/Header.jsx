@@ -53,7 +53,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         navigate("/home");
-        toast.success("Loged out");
+        toast.success("Loged out successfully");
       })
       .catch((err) => {
         toast.error(err.message);
@@ -112,7 +112,7 @@ const Header = () => {
                 <i className="ri-shopping-bag-fill"></i>
                 <span className="badge">{totalQuantity}</span>
               </span>
-             
+
               <div className="profile">
                 <motion.img
                   whileTap={{ scale: 1.2 }}
@@ -120,24 +120,30 @@ const Header = () => {
                   alt=""
                   onClick={toggleProfileActions}
                 />
-      
+
                 <div
                   className="profile__action"
                   ref={profileActionRef}
                   onClick={toggleProfileActions}
                 >
                   {currentUser ? (
-                    <span onClick={logout}>Logout</span>
+                    <div className="d-flex align-items-center justify-content-center flex-column">
+                      <span onClick={logout}>Logout</span>
+                      {currentUser.email === "akelebch12@gmail.com" ? (
+                        <Link to="/dashboard">Dashboard</Link>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   ) : (
                     <div className="d-flex align-items-center justify-content-center flex-column">
                       <Link to="/signup">Signup</Link>
-                        <Link to="/login">Login</Link>
-                        <Link to="/dashboard">Dashboard</Link>
+                      <Link to="/login">Login</Link>
                     </div>
                   )}
                 </div>
               </div>
-              <span>{currentUser ? currentUser.displayName : "" }</span>
+              <span>{currentUser ? currentUser.displayName : ""}</span>
               <div className="mobile__menu">
                 <span onClick={menuToggle}>
                   <i className="ri-menu-line"></i>

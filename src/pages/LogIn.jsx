@@ -7,6 +7,7 @@ import "../styles/login.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase.config";
 import { toast } from "react-toastify";
+import Loader from "../components/UI/Loader"
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -39,7 +40,8 @@ const LogIn = () => {
           <Row>
             {loading ? (
               <Col lg="12" className="text-center">
-                <h5 className="fw-bold">Loading......</h5>
+                <h4 className="text-center">Refresh the page and try again</h4>
+                <Loader/>
               </Col>
             ) : (
               <Col lg="6" className="m-auto text-center">

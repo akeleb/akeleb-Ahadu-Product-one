@@ -22,7 +22,7 @@ const AddProducts = () => {
     e.preventDefault();
     setLoading(true)
     try {
-      const docRef = await collection(db, "products").then()
+      const docRef = await collection(db, "products")
       const storageRef = ref(
         storage,
         `productImages/${Date.now() + eneterProductImg.name}`
@@ -31,7 +31,7 @@ const AddProducts = () => {
         getDownloadURL(snapshot.ref).then(async (downloadURL) => {
           //store product data in firestre database
           await addDoc(docRef, {
-            title: enterTitle,
+            productName: enterTitle,
             description: enterDescription,
             price: enterPrice,
             category: enterCategory,
@@ -45,6 +45,7 @@ const AddProducts = () => {
     } catch (error)
     {
       setLoading(false)
+      console.log(error)
       toast.error("Product not added!");
     }
   };
@@ -58,7 +59,7 @@ const AddProducts = () => {
               <h4 className="mb-4">Add Product</h4>
             <Form className="form__group" onSubmit={addProduct}>
               <FormGroup className="form__Group">
-                <span>Product title</span>
+                <span>Product name</span>
                 <input
                   type="text"
                   placeholder="Enter product name"

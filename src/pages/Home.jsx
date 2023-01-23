@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import products from "../assets/data/products";
 import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col } from "reactstrap";
 
@@ -12,12 +11,16 @@ import ProductsList from "../components/UI/ProductsList";
 import Clock from "../components/UI/Clock";
 
 import counterImg from "../assets/images/counter-timer-img.png";
+import useGetData from "../custom-hooks/useGetdata";
+import Loader from "../components/UI/Loader";
 
 const Home = () => {
+  const { data: products, loading } = useGetData("products");
+
   const [tredingProducts, setTredingProducts] = useState([]);
-  const [ bestSalesProducts, setBestSalesProducts ] = useState([]);
-  const [ bedProducts, setBedProducts ] = useState([]);
-  const [ wardrobeProducts, setWardrobeProducts ] = useState([]);
+  const [bestSalesProducts, setBestSalesProducts] = useState([]);
+  const [bedProducts, setBedProducts] = useState([]);
+  const [wardrobeProducts, setWardrobeProducts] = useState([]);
   const [popularProducts, setPopularProducts] = useState([]);
 
   const year = new Date().getFullYear();
@@ -45,8 +48,7 @@ const Home = () => {
     setBedProducts(filteredBedProducts);
     setWardrobeProducts(filteredWardrobeProducts);
     setPopularProducts(filteredPopularProducts);
-
-  }, []);
+  }, [products]);
   return (
     <Helmet title={"Home"}>
       <section className="hero__section">
@@ -78,7 +80,7 @@ const Home = () => {
             <Col lg="12" className="text-center">
               <h2 className="section__title">Trending Products</h2>
             </Col>
-            <ProductsList data={tredingProducts} />
+            {loading ? <Loader /> : <ProductsList data={tredingProducts} />}
           </Row>
         </Container>
       </section>
@@ -89,7 +91,8 @@ const Home = () => {
             <Col lg="12" className="text-center">
               <h2 className="section__title">Best Sales</h2>
             </Col>
-            <ProductsList data={bestSalesProducts} />
+            {loading ? <Loader /> : <ProductsList data={bestSalesProducts} />}
+            {/* <ProductsList data={bestSalesProducts} /> */}
           </Row>
         </Container>
       </section>
@@ -122,8 +125,10 @@ const Home = () => {
             <Col lg="12" className="text-center mb-5">
               <h2 className="section__title">New Arivals</h2>
             </Col>
-            <ProductsList data={bedProducts} />
-            <ProductsList data={wardrobeProducts } />
+            {loading ? <Loader /> : <ProductsList data={bedProducts} />}
+            {/* <ProductsList data={bedProducts} /> */}
+            {loading ? <Loader /> : <ProductsList data={wardrobeProducts} />}
+            {/* <ProductsList data={wardrobeProducts} /> */}
           </Row>
         </Container>
       </section>
@@ -133,7 +138,8 @@ const Home = () => {
             <Col lg="12" className="text-center mb-5">
               <h2 className="section__title">Popular products</h2>
             </Col>
-            <ProductsList data={popularProducts} />
+            {loading ? <Loader /> : <ProductsList data={popularProducts} />}
+            {/* <ProductsList data={popularProducts} /> */}
           </Row>
         </Container>
       </section>

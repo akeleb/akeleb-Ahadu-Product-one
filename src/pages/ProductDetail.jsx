@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { useParams } from "react-router-dom";
-import products from "../assets/data/products";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import ProductsList from "../components/UI/ProductsList";
@@ -11,8 +10,14 @@ import "../styles/product-detail.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../redux/slices/cartSlice";
 import { toast } from "react-toastify";
+import { db } from "../firebase.config";
+import { doc, getDoc } from "firebase/firestore"
+import useGetData from "../custom-hooks/useGetdata";
 
-const ProductDetail = () => {
+const ProductDetail = () =>
+{
+  
+  const [product,setProduct] = useState({})
   const [tab, setTab] = useState("desc");
   const reviewUser = useRef("");
   const reviewMsg = useRef("");
@@ -20,13 +25,31 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const product = products.find((item) => item.id === id);
+  // const product = products.find((item) => item.id === id);
+  const { data: products } = useGetData("products");
+  const docRef = doc(db, "products", id)
+  
+  useEffect(() =>
+  {
+    const getProduct = async () =>
+    {
+      const docSnap = await getDoc(docRef)
+      if (docSnap.exists())
+      {
+        setProduct(docSnap.data());
+      } else
+      {
+        console.log("No product found")
+      }
+    }
+    getProduct();
+  },[])
   const {
     imgUrl,
     productName,
     price,
-    avgRating,
-    reviews,
+    // avgRating,
+    // reviews,
     description,
     category,
   } = product;
@@ -68,7 +91,7 @@ const ProductDetail = () => {
         <Container>
           <Row>
             <Col lg="6">
-              <img src={imgUrl} alt="" />
+              <img src={imgUrl} alt="" className="images"/>
             </Col>
             <Col lg="6">
               <div className="product__detail">
@@ -91,15 +114,15 @@ const ProductDetail = () => {
                       <i className="ri-star-half-s-line"></i>
                     </span>
                   </div>
-                  <p>
+                  {/* <p>
                     (<span>{avgRating}</span> Ratings)
-                  </p>
+                  </p> */}
                 </div>
                 <div className="d-flex align-items-center gap-5">
                   <span className="product__price">
-                    {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ETB
+                    {price} ETB
                   </span>
-                  <span>Category: {category.charAt(0).toUpperCase()+category.slice(1)}</span>
+                  <span>Category: {category}</span>
                 </div>
                 <p className="mt-3 descp">{description}</p>
                 <motion.button
@@ -129,7 +152,7 @@ const ProductDetail = () => {
                   className={`${tab === "rev" ? "activ__tab" : ""}`}
                   onClick={() => setTab("rev")}
                 >
-                  Reviews ({reviews.length})
+                   Reviews ({0}) 
                 </h6>
               </div>
               {tab === "desc" ? (
@@ -139,7 +162,7 @@ const ProductDetail = () => {
               ) : (
                 <div className="product__review">
                   <div className="review__wrapper">
-                    <ul>
+                    {/* <ul>
                       {reviews?.map((item, index) => (
                         <li key={index} className="mb-4">
                           <h6>anonymous</h6>
@@ -147,7 +170,7 @@ const ProductDetail = () => {
                           <p className="descp">{item.text}</p>
                         </li>
                       ))}
-                    </ul>
+                    </ul> */}
                     <div className="review__form">
                       <h4>leave your experience</h4>
                       <form action="" onSubmit={submitHandler}>

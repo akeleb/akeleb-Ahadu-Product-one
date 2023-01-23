@@ -64,8 +64,10 @@ border-radius: 5px;
 }
 
 
-.active__admin-menu:focus{
-  background: whitesmoke;
+.active__admin-menu{
+  background: rgb(109, 226, 226) !important;
+  color: rgb(0, 26, 255);
 }
+
 
 /* className={navClass=>navClass.isActive? "active__admin-menu":""}*/

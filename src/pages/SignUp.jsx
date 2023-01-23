@@ -52,10 +52,17 @@ const SignUp = () => {
       });
       setLoading(false);
       toast.success("Account created successfully");
-      naviate("/login");
+      naviate("/shop");
     } catch (error) {
       setLoading(false);
-      toast.error(error.message);
+      if (email)
+      {
+        toast.error("We found an account with this email");
+      }
+      else
+      {
+        toast.error(error.message)
+      }
     }
   };
 
@@ -77,7 +84,8 @@ const SignUp = () => {
                       type="text"
                       placeholder="Username"
                       value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
                     />
                   </FormGroup>
                   <FormGroup className="form__group">
@@ -85,7 +93,8 @@ const SignUp = () => {
                       type="email"
                       placeholder="Enter Your Email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
                     />
                   </FormGroup>
 
@@ -94,13 +103,17 @@ const SignUp = () => {
                       type="password"
                       placeholder="Enter Your Password"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
                     />
                   </FormGroup>
-                  <FormGroup className="form__group">
+                    <FormGroup className="form__group">
+                      <span style={{color:"white"}}>Upload profile picture</span>
                     <input
-                      type="file"
-                      onChange={(e) => setFile(e.target.files[0])}
+                        type="file"
+                        placeholder="Upload profile picture"
+                        onChange={(e) => setFile(e.target.files[ 0 ])}
+                        required
                     />
                   </FormGroup>
                   <motion.button
