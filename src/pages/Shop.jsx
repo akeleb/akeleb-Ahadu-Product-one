@@ -4,14 +4,28 @@ import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col } from "reactstrap";
 import "../styles/Shop.css";
 
-import products from "../assets/data/products";
 import ProductsList from "../components/UI/ProductsList";
 
-const Shop = () => {
-  const [ productsData, setProductsData ] = useState(products);
-  const handleFilter = (e) => {
-    const filterValue = e.target.value;
+import useGetData from "../custom-hooks/useGetdata";
 
+const Shop = () => {
+  const { data: products } = useGetData("products");
+  const [productsData, setProductsData] = useState(products);
+
+  const handleFilter = async (e) => {
+    const filterValue = await e.target.value;
+
+    if (filterValue === "") {
+      const filteredProducts = products.filter(
+        (item) =>
+          item.category === "sofa" ||
+          item.category === "chair" ||
+          item.category === "bed" ||
+          item.category === "table" ||
+          item.category === "wardrobe"
+      );
+      setProductsData(filteredProducts);
+    }
     if (filterValue === "sofa") {
       const filteredProducts = products.filter(
         (item) => item.category === "sofa"
@@ -54,13 +68,16 @@ const Shop = () => {
 
   const handlSort = (e) => {
     const sortValue = e.target.value;
-    if (sortValue === "ascending")
-    {
-      const sortedProducts= products.sort((a, b) => a.productName.localeCompare(b.productName))
+    if (sortValue === "ascending") {
+      const sortedProducts = products.sort((a, b) =>
+        a.productName.localeCompare(b.productName)
+      );
       setProductsData(sortedProducts);
     }
     if (sortValue === "descending") {
-      const sortedProducts= products.sort().reverse((a, b) => b.productName.localeCompare(a.productName))
+      const sortedProducts = products
+        .sort()
+        .reverse((a, b) => b.productName.localeCompare(a.productName));
       setProductsData(sortedProducts);
     }
   };
@@ -74,7 +91,8 @@ const Shop = () => {
             <Col lg="3" md="6">
               <div className="filter__widget">
                 <select onChange={handleFilter}>
-                  <option>Filter By Category</option>
+                  <option value="">Filter By Category</option>
+                  <option value="">All products</option>
                   <option value="chair">Chair</option>
                   <option value="sofa">Sofa</option>
                   <option value="bed">Bed</option>
