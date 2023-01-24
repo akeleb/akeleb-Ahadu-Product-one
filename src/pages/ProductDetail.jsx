@@ -37,10 +37,7 @@ const ProductDetail = () =>
       if (docSnap.exists())
       {
         setProduct(docSnap.data());
-      } else
-      {
-        console.log("No product found")
-      }
+      } 
     }
     getProduct();
   })
@@ -83,7 +80,7 @@ const ProductDetail = () =>
   };
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [product]);
+  }, []);
   return (
     <Helmet title={productName}>
       <CommonSection title={productName} />
