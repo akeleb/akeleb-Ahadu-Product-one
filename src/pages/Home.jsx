@@ -48,7 +48,7 @@ const Home = () => {
     setBedProducts(filteredBedProducts);
     setWardrobeProducts(filteredWardrobeProducts);
     setPopularProducts(filteredPopularProducts);
-  }, [products]);
+  }, [loading]);
   return (
     <Helmet title={"Home"}>
       <section className="hero__section">

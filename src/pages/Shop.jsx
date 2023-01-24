@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import CommonSection from "../components/UI/CommonSection";
 import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col } from "reactstrap";
@@ -9,23 +9,18 @@ import ProductsList from "../components/UI/ProductsList";
 import useGetData from "../custom-hooks/useGetdata";
 
 const Shop = () => {
-  const { data: products } = useGetData("products");
-  const [productsData, setProductsData] = useState(products);
+  const { data: products,loading } = useGetData("products");
+  const [ productsData, setProductsData ] = useState(products);
 
-  const handleFilter = async (e) => {
-    const filterValue = await e.target.value;
+  useEffect(() =>
+  {
+    setProductsData(products)
+  },[loading])
 
-    if (filterValue === "") {
-      const filteredProducts = products.filter(
-        (item) =>
-          item.category === "sofa" ||
-          item.category === "chair" ||
-          item.category === "bed" ||
-          item.category === "table" ||
-          item.category === "wardrobe"
-      );
-      setProductsData(filteredProducts);
-    }
+  const handleFilter = (e) =>
+  {
+    setProductsData(products);
+    const filterValue = e.target.value;
     if (filterValue === "sofa") {
       const filteredProducts = products.filter(
         (item) => item.category === "sofa"
@@ -66,21 +61,21 @@ const Shop = () => {
     setProductsData(searchedProducts);
   };
 
-  const handlSort = (e) => {
-    const sortValue = e.target.value;
-    if (sortValue === "ascending") {
-      const sortedProducts = products.sort((a, b) =>
-        a.productName.localeCompare(b.productName)
-      );
-      setProductsData(sortedProducts);
-    }
-    if (sortValue === "descending") {
-      const sortedProducts = products
-        .sort()
-        .reverse((a, b) => b.productName.localeCompare(a.productName));
-      setProductsData(sortedProducts);
-    }
-  };
+  // const handlSort = (e) => {
+  //   const sortValue = e.target.value;
+  //   if (sortValue === "ascending") {
+  //     const sortedProducts = products.sort((a, b) =>
+  //       a.productName.localeCompare(b.productName)
+  //     );
+  //     setProductsData(sortedProducts);
+  //   }
+  //   if (sortValue === "descending") {
+  //     const sortedProducts = products.sort((a, b) =>
+  //       b.productName.localeCompare(a.productName)
+  //     );
+  //     setProductsData(sortedProducts);
+  //   }
+  // };
 
   return (
     <Helmet title="Shop">
@@ -91,8 +86,8 @@ const Shop = () => {
             <Col lg="3" md="6">
               <div className="filter__widget">
                 <select onChange={handleFilter}>
-                  <option value="">Filter By Category</option>
-                  <option value="">All products</option>
+                  <option>Filter By Category</option>
+                  <option>All products</option>
                   <option value="chair">Chair</option>
                   <option value="sofa">Sofa</option>
                   <option value="bed">Bed</option>
@@ -103,7 +98,7 @@ const Shop = () => {
             </Col>
             <Col lg="3" md="6" className="text-end">
               <div className="filter__widget">
-                <select onChange={handlSort}>
+                <select>
                   <option>Sort By</option>
                   <option value="ascending">Ascending</option>
                   <option value="descending">Descending</option>
