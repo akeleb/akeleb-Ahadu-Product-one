@@ -55,14 +55,8 @@ const SignUp = () => {
       naviate("/shop");
     } catch (error) {
       setLoading(false);
-      if (email)
-      {
         toast.error("We found an account with this email");
-      }
-      else
-      {
-        toast.error(error.message)
-      }
+     
     }
   };
 
