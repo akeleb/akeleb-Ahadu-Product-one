@@ -29,7 +29,9 @@ const LogIn = () => {
       setLoading(false);
       toast.success("Successfully loged in");
       navigate("/checkout");
-    } catch (error) {
+    } catch (error)
+    {
+      setLoading(false);
       toast.error("Email or Password is incorrect");
     }
   };
