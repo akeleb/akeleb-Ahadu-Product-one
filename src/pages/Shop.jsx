@@ -15,6 +15,7 @@ const Shop = () => {
   useEffect(() =>
   {
     setProductsData(products)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[loading])
 
   const handleFilter = (e) =>
