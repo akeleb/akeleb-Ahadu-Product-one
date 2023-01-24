@@ -48,6 +48,7 @@ const Home = () => {
     setBedProducts(filteredBedProducts);
     setWardrobeProducts(filteredWardrobeProducts);
     setPopularProducts(filteredPopularProducts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
   return (
     <Helmet title={"Home"}>
