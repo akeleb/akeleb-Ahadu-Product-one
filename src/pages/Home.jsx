@@ -20,24 +20,20 @@ const Home = () => {
   const [tredingProducts, setTredingProducts] = useState([]);
   const [bestSalesProducts, setBestSalesProducts] = useState([]);
   const [bedProducts, setBedProducts] = useState([]);
-  const [wardrobeProducts, setWardrobeProducts] = useState([]);
   const [popularProducts, setPopularProducts] = useState([]);
 
   const year = new Date().getFullYear();
 
   useEffect(() => {
     const filteredTrendingProducts = products.filter(
-      (item) => item.category === "chair"
+      (item) => item.category === "chair" ||item.category === "table"
     );
 
     const filteredBestSalesProducts = products.filter(
       (item) => item.category === "sofa"
     );
     const filteredBedProducts = products.filter(
-      (item) => item.category === "bed"
-    );
-    const filteredWardrobeProducts = products.filter(
-      (item) => item.category === "wardrobe"
+      (item) => item.category === "bed" ||item.category === "wardrobe"
     );
     const filteredPopularProducts = products.filter(
       (item) => item.shortDesc === "popular"
@@ -46,7 +42,6 @@ const Home = () => {
     setTredingProducts(filteredTrendingProducts);
     setBestSalesProducts(filteredBestSalesProducts);
     setBedProducts(filteredBedProducts);
-    setWardrobeProducts(filteredWardrobeProducts);
     setPopularProducts(filteredPopularProducts);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
@@ -81,7 +76,7 @@ const Home = () => {
             <Col lg="12" className="text-center">
               <h2 className="section__title">Trending Products</h2>
             </Col>
-            {loading ? <Loader /> : <ProductsList data={tredingProducts} />}
+            {loading ? <Loader /> : <ProductsList data={tredingProducts}/>}
           </Row>
         </Container>
       </section>
@@ -128,7 +123,7 @@ const Home = () => {
             </Col>
             {loading ? <Loader /> : <ProductsList data={bedProducts} />}
             {/* <ProductsList data={bedProducts} /> */}
-            {loading ? <Loader /> : <ProductsList data={wardrobeProducts} />}
+           
             {/* <ProductsList data={wardrobeProducts} /> */}
           </Row>
         </Container>
