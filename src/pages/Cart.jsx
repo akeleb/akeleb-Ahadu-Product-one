@@ -4,14 +4,29 @@ import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { motion } from "framer-motion";
 import { cartActions } from "../redux/slices/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const navigate = useNavigate();
+
+  const navToCheckout = () =>
+  {
+    if (cartItems.length === 0)
+    {
+      toast.error("Your cart is empty. Add some products to checkout")
+    }
+    else
+    {
+      navigate("/checkout")
+    }
+  }
   return (
     <Helmet title="Cart">
       <CommonSection title="Shoping Cart" />
@@ -58,9 +73,10 @@ const Cart = () => {
                 Taxes and shiping will calculate in checkout
               </p>
               <div>
-                <button className="buy__btn w-100">
-                  <Link to="/checkout">Checkout</Link>
-                </button>
+                <button
+                  className="buy__btn w-100"
+                  onClick={navToCheckout}
+                >Checkout</button>
                 <button className="buy__btn w-100 mt-3">
                   <Link to="/shop">Continue Shoping</Link>
                 </button>

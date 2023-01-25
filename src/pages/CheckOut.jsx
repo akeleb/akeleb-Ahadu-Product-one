@@ -13,7 +13,7 @@ import "react-phone-input-2/lib/bootstrap.css";
 import { db } from "../firebase.config";
 import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/UI/Loader"
+import Loader from "../components/UI/Loader";
 
 const CheckOut = () => {
   const totalQty = useSelector((state) => state.cart.totalQuantity);
@@ -39,23 +39,30 @@ const CheckOut = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const docRef = await collection(db, "orders");
-      await addDoc(docRef, {
-        customerName: enterName,
-        email: enterEmail,
-        phone: enterPhone,
-        streetAddress: enterStreetAddress,
-        city: enterCity,
-        postalCode: enterPostalCode,
-        country: enterCountry,
-        totalQty: totalQty,
-        subTotal: totalAmount,
-        totalCost: totalAmount,
-      });
-      setLoading(false);
-      toast.success("Your order submited successfully");
-      navigate("/shop");
-    } catch (error) {}
+      if (totalQty === 0) {
+        toast.error("Your cart is empty!");
+        navigate("/cart");
+      } else {
+        const docRef = await collection(db, "orders");
+        await addDoc(docRef, {
+          customerName: enterName,
+          email: enterEmail,
+          phone: enterPhone,
+          streetAddress: enterStreetAddress,
+          city: enterCity,
+          postalCode: enterPostalCode,
+          country: enterCountry,
+          totalQty: totalQty,
+          subTotal: totalAmount,
+          totalCost: totalAmount,
+        });
+        setLoading(false);
+        toast.success("Your order submited successfully");
+        navigate("/shop");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -65,116 +72,118 @@ const CheckOut = () => {
         <Container>
           <Row>
             <Col lg="8">
-              {loading ? <Loader /> : <>
-              <h6 className="mb-4 fw-bold">Billing Information</h6>
-              <Form className="billing__form" onSubmit={submitOrders}>
-                <FormGroup className="form__group">
-                  <input
-                    type="text"
-                    placeholder="Enter Your Name"
-                    className="inputf"
-                    value={enterName}
-                    onChange={(e) => setEnterName(e.target.value)}
-                    required
-                  />
-                </FormGroup>
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  <h6 className="mb-4 fw-bold">Billing Information</h6>
+                  <Form className="billing__form" onSubmit={submitOrders}>
+                    <Col>
+                      <div className="checkout__cart">
+                        <h6>
+                          Total Quantity: <span>{totalQty} items</span>
+                        </h6>
+                        <h6>
+                          Subtotal: <span>{totalAmount} Birr</span>
+                        </h6>
+                        <h6>
+                          <span>
+                            Shipping: <br />
+                            Free shipping
+                          </span>{" "}
+                          <span>0 Birr</span>
+                        </h6>
 
-                <FormGroup className="form__group">
-                  <input
-                    type="email"
-                    placeholder="Enter Your Email"
-                    className="inputf"
-                    value={enterEmail}
-                    onChange={(e) => setEnterEmail(e.target.value)}
-                    required
-                  />
-                </FormGroup>
+                        <h4>
+                          Total cost: <span>{totalAmount} Birr</span>
+                        </h4>
+                      </div>
+                    </Col>
 
-                <FormGroup className="form__group">
-                  <PhoneInput
-                    className="phn__select"
-                    country="et"
-                    placeholder="Enter your phone number"
-                    enableSearch={true}
-                    value={enterPhone}
-                    onChange={(phone) => setEnterPhone(phone)}
-                    required
-                  />
-                </FormGroup>
+                    <FormGroup className="form__group">
+                      <input
+                        type="text"
+                        placeholder="Enter Your Name"
+                        className="inputf"
+                        value={enterName}
+                        onChange={(e) => setEnterName(e.target.value)}
+                        required
+                      />
+                    </FormGroup>
 
-                <FormGroup className="form__group">
-                  <input
-                    type="text"
-                    placeholder="Streeet Address"
-                    className="inputf"
-                    value={enterStreetAddress}
-                    onChange={(e) => setEnterStreetAddress(e.target.value)}
-                    required
-                  />
-                </FormGroup>
+                    <FormGroup className="form__group">
+                      <input
+                        type="email"
+                        placeholder="Enter Your Email"
+                        className="inputf"
+                        value={enterEmail}
+                        onChange={(e) => setEnterEmail(e.target.value)}
+                        required
+                      />
+                    </FormGroup>
 
-                <FormGroup className="form__group">
-                  <input
-                    type="text"
-                    placeholder="City"
-                    className="inputf"
-                    value={enterCity}
-                    onChange={(e) => setEnterCity(e.target.value)}
-                    required
-                  />
-                </FormGroup>
-                <FormGroup className="form__group">
-                  <input
-                    type="text"
-                    placeholder="Postal Code"
-                    className="inputf"
-                    value={enterPostalCode}
-                    onChange={(e)=>setEnterPostalCode(e.target.value)}
-                  />
-                </FormGroup>
+                    <FormGroup className="form__group">
+                      <PhoneInput
+                        className="phn__select"
+                        country="et"
+                        placeholder="Enter your phone number"
+                        enableSearch={true}
+                        value={enterPhone}
+                        onChange={(phone) => setEnterPhone(phone)}
+                        required
+                      />
+                    </FormGroup>
 
-                <FormGroup className="form__group">
-                  <Select
-                    className="country__list"
-                    options={options}
-                    value={enterCountry}
-                    onChange={(country)=>setEnterCountry(country)}
-                    placeholder="Select your country... "
-                  />
-                </FormGroup>
-              </Form>
-                
-              </>}
-             
-            </Col>
-            <Col lg="4">
-              <div className="checkout__cart">
-                <h6>
-                  Total Quantity: <span>{totalQty} items</span>
-                </h6>
-                <h6>
-                  Subtotal: <span>{totalAmount} Birr</span>
-                </h6>
-                <h6>
-                  <span>
-                    Shipping: <br />
-                    Free shipping
-                  </span>{" "}
-                  <span>0 Birr</span>
-                </h6>
+                    <FormGroup className="form__group">
+                      <input
+                        type="text"
+                        placeholder="Streeet Address"
+                        className="inputf"
+                        value={enterStreetAddress}
+                        onChange={(e) => setEnterStreetAddress(e.target.value)}
+                        required
+                      />
+                    </FormGroup>
 
-                <h4>
-                  Total cost: <span>{totalAmount} Birr</span>
-                </h4>
-                <motion.button
-                  type="submit"
-                  whileTap={{ scale: 1.2 }}
-                  className="buy__btn auth__btn checkout__btn w-100"
-                  onClick={submitOrders}
-                >
-                  place your order
-                </motion.button>
-              </div>
+                    <FormGroup className="form__group">
+                      <input
+                        type="text"
+                        placeholder="City"
+                        className="inputf"
+                        value={enterCity}
+                        onChange={(e) => setEnterCity(e.target.value)}
+                        required
+                      />
+                    </FormGroup>
+                    <FormGroup className="form__group">
+                      <input
+                        type="text"
+                        placeholder="Postal Code"
+                        className="inputf"
+                        value={enterPostalCode}
+                        onChange={(e) => setEnterPostalCode(e.target.value)}
+                      />
+                    </FormGroup>
+
+                    <FormGroup className="form__group">
+                      <Select
+                        className="country__list"
+                        options={options}
+                        value={enterCountry}
+                        onChange={(country) => setEnterCountry(country)}
+                        placeholder="Select your country... "
+                      />
+                    </FormGroup>               
+                      <motion.button
+                        type="submit"
+                        whileTap={{ scale: 1.2 }}
+                        className="order__btn"
+                      >
+                        place your order
+                      </motion.button>    
+                  </Form>
+                </>
+              )}
             </Col>
           </Row>
         </Container>
