@@ -128,7 +128,7 @@ const Header = () => {
                 >
                   {currentUser ? (
                     <div className="d-flex align-items-center justify-content-center flex-column">
-                      <span onClick={logout}>Logout</span>
+                     <Link to="#" onClick={logout}>Logout</Link>
                       {currentUser.email === "akelebch12@gmail.com" ? (
                         <Link to="/dashboard">Dashboard</Link>
                       ) : (

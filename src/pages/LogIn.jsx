@@ -41,8 +41,7 @@ const LogIn = () => {
         <Container>
           <Row>
             {loading ? (
-              <Col lg="12" className="text-center">
-                <h4 className="text-center">Refresh the page and try again</h4>
+              <Col lg="12" className="align-content-center">
                 <Loader/>
               </Col>
             ) : (

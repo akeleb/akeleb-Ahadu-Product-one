@@ -18,8 +18,7 @@ const AddProducts = () => {
   const [ loading, setLoading ] = useState(false);
   const navigate = useNavigate();
 
-  const addProduct = async (e) => {
-    e.preventDefault();
+  const addProduct = async () => {
     setLoading(true)
     try {
       const docRef = await collection(db, "products")
@@ -45,7 +44,7 @@ const AddProducts = () => {
     } catch (error)
     {
       setLoading(false)
-      console.log(error)
+      // console.log(error)
       toast.error("Product not added!");
     }
   };
