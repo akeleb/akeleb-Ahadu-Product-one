@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import { motion } from "framer-motion";
@@ -8,7 +8,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase.config";
 import { toast } from "react-toastify";
 import Loader from "../components/UI/Loader"
-
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +34,9 @@ const LogIn = () => {
       toast.error("Email or Password is incorrect");
     }
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  })
   return (
     <Helmet title="Login">
       <section>

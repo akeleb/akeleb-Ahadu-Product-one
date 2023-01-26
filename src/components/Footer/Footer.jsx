@@ -16,7 +16,7 @@ const Footer = () => {
             <div className="logo">
               {/* <img src={logo} alt="logo" /> */}
               <div>
-                <h1 className="text-white">Hulum-Furniture</h1>
+                <h1 className="text-white">Hulum-Furniture-Store</h1>
                 {/* <p>Give your home extra beauty❤️</p> */}
               </div>
             </div>
@@ -47,18 +47,24 @@ const Footer = () => {
           <Col lg="2" md="3" className="mb-4">
             <div className="footer__quick-links">
               <h4 className="quick__links-title">Usefull Links</h4>
-              <ListGroup >
+              <ListGroup>
                 <ListGroupItem className="ps-0 border-0">
-                  <Link to="#">Shop</Link>
+                  <Link to="/shop">Shop</Link>
                 </ListGroupItem>
                 <ListGroupItem className="ps-0 border-0">
-                  <Link to="#">Cart</Link>
+                  <Link to="/cart">Cart</Link>
                 </ListGroupItem>
                 <ListGroupItem className="ps-0 border-0">
                   <Link to="/login">Login</Link>
                 </ListGroupItem>
                 <ListGroupItem className="ps-0 border-0">
-                  <Link to="#">Privacy policy</Link>
+                <a
+                  href="https://portfolio.hulumfurniture.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                 About us.
+                </a>
                 </ListGroupItem>
               </ListGroup>
             </div>
@@ -85,9 +91,10 @@ const Footer = () => {
                   <span>
                     <i className="ri-mail-line"></i>
                   </span>
-                  <p><a href="mailto:email@hulumfurniture.com">
+                  <p>
+                    <a href="mailto:email@hulumfurniture.com">
                       email@hulumfurniture.com
-                  </a>
+                    </a>
                   </p>
                 </ListGroupItem>
               </ListGroup>
@@ -95,8 +102,18 @@ const Footer = () => {
           </Col>
           <Col lg="12">
             <p className="footer__copyright">
-              copyright &copy; {year} <i>Developed by Hulum.</i> All rights
-              reserved.
+             &copy; {year}{" "}
+              <i>
+                Developed by{" "}
+                <a
+                  href="https://portfolio.hulumfurniture.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                 <b>Ahadu Cloud Tech(ACT).</b>
+                </a>
+              </i>{" "}
+              All rights reserved.
             </p>
           </Col>
         </Row>

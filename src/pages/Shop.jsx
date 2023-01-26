@@ -14,6 +14,9 @@ const Shop = () => {
 
   useEffect(() => {
     setProductsData(products);
+
+    window.scrollTo(0, 0);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
@@ -62,20 +65,15 @@ const Shop = () => {
   const handlSort = (e) => {
     const sortValue = e.target.value;
     if (sortValue === "ascending") {
-      const sortedProducts = products.sort((a, b) =>
-      {
-        return a.productName.localeCompare(b.productName)
-        }
-      );
+      const sortedProducts = products.sort((a, b) => {
+        return a.productName.localeCompare(b.productName);
+      });
       setProductsData(sortedProducts);
     }
     if (sortValue === "descending") {
-      const sortedProducts = products
-        .sort((a, b) =>
-        {
-          return b.productName.localeCompare(a.productName)
-         
-        })
+      const sortedProducts = products.sort((a, b) => {
+        return b.productName.localeCompare(a.productName);
+      });
       setProductsData(sortedProducts);
     }
   };
